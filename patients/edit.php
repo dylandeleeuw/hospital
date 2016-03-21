@@ -1,27 +1,27 @@
 <?php
 	require_once "edit.logic.php";
 	include "../common/header.php";
-
-	$db = new mysqli('localhost','root','','hospital');
-	$query = "select * from clients";
-	$result = $db->query($query);
-	$clients = $result->fetch_all(MYSQLI_ASSOC);
 ?>
-
 	<h1>Edit patiënt</h1>
 	<form method="post">
 		<div>
-			<input type="hidden" name="id" value="<?=$patient['id']?>">
+			<input type="hidden" name="id" value="<?php echo $patient['id']?>">
 			<label for="name">Name:</label>
-			<input type="text" id="name" name="name" value="<?=$patient['name']?>">
+			<input type="text" id="name" name="name" value="<?php echo $patient['name'];?>">
 		</div>
 		<div>
 			<label for="name">Species:</label>
-			<input type="text" id="species" name="species" value="<?=$patient['species']?>">
+			<select name="species">
+				<?php foreach ($species as $specie):?>
+					<option value="<?php echo $specie['id'];?>"><?php echo $specie['species'];?></option>
+				<?php 
+					endforeach;
+				?>
+			</select>
 		</div>
 		<div>
-			<label for="name">Species:</label>
-			<textarea id="status" name="status"><?=$patient['status']?></textarea>
+			<label for="name">Status:</label>
+			<textarea id="status" name="status"><?php echo $patient['status'];?></textarea>
 		</div>
 		<div>
 			<label for="name">Gender:</label>

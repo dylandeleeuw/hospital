@@ -4,13 +4,15 @@
 		
 		// Prepare data for insertion
 		$name = $db->escape_string($_POST["name"]);
-		$species = $db->escape_string($_POST["species"]);
 		$status = $db->escape_string($_POST["status"]);
 		$gender = $db->escape_string($_POST["gender"]);
-		$client_id = $db->escape_string($_POST["id"]);
+		$client_id = $db->escape_string($_POST["cl_id"]);
+		$species_id = $db->escape_string($_POST["sp_id"]);
 		// Prepare query and execute
-		$query = "insert into patient (name, species, status, gender, client_id) values ('$name','$species','$status','$gender','$client_id')";
+		$query = "INSERT INTO `hospital`.`patient` (`name`, `species_id`, `status`, `gender`, `client_id`) VALUES ('$name', $species_id, '$status', '$gender', $client_id)";
 		$result = $db->query($query);
+		var_dump($_POST);
+		var_dump($result);
 	
     // Tell the browser to go back to the index page.
     header("Location: ./");

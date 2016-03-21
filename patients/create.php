@@ -6,6 +6,11 @@
 	$query = "select * from clients";
 	$result = $db->query($query);
 	$clients = $result->fetch_all(MYSQLI_ASSOC);
+
+	$db = new mysqli('localhost','root','','hospital');
+	$query = "select * from species";
+	$result = $db->query($query);
+	$species = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 	<h1>New patiënt</h1>
 	<form method="post">
@@ -15,7 +20,13 @@
 		</div>
 		<div>
 			<label for="name">Species:</label>
-			<input type="text" id="species" name="species">
+			<select name="sp_id">
+			 	<?php foreach ($species as $specie):?> 
+			 		<option value="<?php echo $specie['id'] ?>"><?php echo $specie['species'];?></option>
+			 	<?php
+			 		endforeach;
+			 	?>			
+			</select>
 		</div>
 		<div>
 			<label for="name">Status:</label>
@@ -28,13 +39,13 @@
 		</div>
 		<div>
 			<label for="name">Client:</label>
-			<select name="id">
+			<select name="cl_id">
 			 	<?php foreach ($clients as $client):?> 
 			 		<option value="<?php echo $client['id'] ?>"><?php echo $client['name'];?></option>
 			 	<?php
 			 		endforeach;
 			 	?>
-			</select>	
+			</select>
 		</div>
 		<div>
 			<label></label>

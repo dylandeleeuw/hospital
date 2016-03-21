@@ -3,13 +3,21 @@
 		$patient = NULL;
 		if (isset($_GET['id'])):
 			// Get Patient for id
-			$db = new mysqli('localhost','root','','hospital');
-			$id = $db->escape_string($_GET["id"]);
-			
-			$query = "select * from patient where id=$id";
-			$result = $db->query($query);
-		
-			$patient = $result->fetch_assoc();
+				$db = new mysqli('localhost','root','','hospital');
+				$query = "select * from clients";
+				$result = $db->query($query);
+				$clients = $result->fetch_all(MYSQLI_ASSOC);
+
+				$db = new mysqli('localhost','root','','hospital');
+				$query = "select * from species";
+				$result = $db->query($query);
+				$species = $result->fetch_all(MYSQLI_ASSOC);
+
+				$db = new mysqli('localhost','root','','hospital');
+				$id = $db->escape_string($_GET["id"]);
+				$query = "select * from patient where id=$id";
+				$result = $db->query($query);
+				$patient = $result->fetch_assoc();
 		endif;
 		if ($patient == NULL):
 			// No patient found
@@ -31,8 +39,10 @@
 		var_dump($_POST);
 		
 		// Prepare query and execute
-		$query = "update patient set name='$name', species='$species', status='$status', gender='$gender', client_id='$client_id' where id=$id";
+		$query = "UPDATE `hospital`.`patient` SET `name`='$name', `species_id`='$species', `status`='$status', `gender`='$gender', `client_id`='$client_id' WHERE  `id`='$id'";
 		$result = $db->query($query);
+
+		var_dump($result);
 
 	
     // Tell the browser to go back to the index page.

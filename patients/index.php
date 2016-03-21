@@ -22,20 +22,18 @@
 ?>
 			<tr>
 				<td><?=$patient['name']?></td>
-				<td><?=$patient['species']?></td>
+				<td><?=$patient['species_species']?></td>
 				<td><?=$patient['status']?></td>
 				<td><?=$patient['gender']?></td>
-				<td><?=$patient['client_id']?></td>
+				<td><?=$patient['client_name']?></td>
 				<td class="center"><a href="edit.php?id=<?=$patient['id']?>">edit</a></td>
 				<td class="center"><a href="delete.php?id=<?=$patient['id']?>">delete</a></td>
 			</tr>
-
 <?php
-	endforeach;
+	endforeach;	
 ?>
 		</tbody>
 	</table>
-	
 <?php
 	include "../common/footer.php";
 ?>
